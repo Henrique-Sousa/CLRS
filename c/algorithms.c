@@ -11,6 +11,33 @@ void insertion_sort(int arr[], int length) {
     }
 }
 
+
+/*===================
+SELECTION SORT
+best-case:  \theta(n^2)
+worst-case: \theta(n^2)
+=====================*/
+
+void selection_sort(int arr[], int length) {
+    int i, j, aux;
+    for (i = 0; i < length - 1; i++) {
+        for (j = i + 1; j < length; j++) {
+            if (arr[j] < arr[i]) {
+                aux = arr[i];
+                arr[i] = arr[j];
+                arr[j] = aux;
+            }
+        }
+    }
+}
+
+
+/*===================
+LINEAR SEARCH
+average-case: \theta(n) - it needs to check (n + 1)/2 elements on average
+worst-case: \theta(n)
+=====================*/
+
 int linear_search(int arr[], int length, int value) {
     int i;
     for (i = 0; i < length; i++) {
@@ -20,6 +47,7 @@ int linear_search(int arr[], int length, int value) {
     }
     return -1;
 }
+
 
 void binary_addition(char num1[], char num2[], char result[], int length) {
     int i;
