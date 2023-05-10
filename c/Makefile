@@ -6,14 +6,13 @@ CC = gcc
 
 all: sort.out linear-search.out binary-addition.out
 
-
 binary-addition.out: binary-addition.o algorithms.o utils.o
 	$(CC) $^ -o $@ $(LDFLAGS)
 
 linear-search.out: linear-search.o algorithms.o
 	$(CC) $^ -o $@ $(LDFLAGS)
 
-sort.out: sort.o algorithms.o utils.o
+sort.out: utils.o algorithms.o sort.o
 	$(CC) $^ -o $@ $(LDFLAGS)
 
 %.o: %.c

@@ -1,3 +1,5 @@
+#include <limits.h>
+
 void insertion_sort(int arr[], int length) {
     int i, j, key;
     for (i = 1; i < length; i++) {
@@ -60,4 +62,43 @@ void binary_addition(char num1[], char num2[], char result[], int length) {
         result[i + 1] = sum;
     }
     result[i + 1] = carry;
+}
+
+void merge(int arr[], int p, int q, int r) {
+    int n1, n2, i, j, k;
+
+    n1 = q - p + 1;
+    n2 = r - q;
+    int left[n1 + 1], right[n2 + 1];
+
+    for (i = 0; i < n1; i++) {
+        left[i] = arr[p + i];
+    }
+    for (j = 0; j < n2; j++) {
+        right[j] = arr[q + j + 1];
+    }
+
+    left[n1] = INT_MAX;
+    right[n2] = INT_MAX;
+    
+    i = j = 0;
+    for (k = p; k <= r; k++) {
+        if (left[i] <= right[j]) {
+            arr[k] = left[i];
+            i++;
+        } else {
+            arr[k] = right[j];
+            j++;
+        }
+    }
+}
+
+void merge_sort(int arr[], int p, int r) {
+    int q;
+    if (p < r) {
+        q = (p + r) / 2;
+        merge_sort(arr, p, q);
+        merge_sort(arr, q + 1, r);
+        merge(arr, p, q, r);
+    }
 }
