@@ -15,8 +15,5 @@ linear-search.out: linear-search.o algorithms.o
 sort.out: utils.o algorithms.o sort.o
 	$(CC) $^ -o $@ $(LDFLAGS)
 
-%.o: %.c
-	$(CC) -c $^ -o $@ $(CFLAGS)
-
 clean:
 	rm -f *.o && rm -f *.out
