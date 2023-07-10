@@ -24,31 +24,33 @@ void set_array(int arr[]) {
     arr[5] = 57;
     arr[6] = 9;
     arr[7] = 49;
+    arr[8] = 34;
 }
 
 int main() {
-    int arr[8];
+    const unsigned char s = 9;
+    int arr[s];
 
     set_array(arr);
     printf("unsorted array: ");
-    print_int_array(arr, 8);
-    insertion_sort(arr, 8);
+    print_int_array(arr, s);
+    insertion_sort(arr, s);
     printf("insertion sort: ");
-    print_int_array(arr, 8);
+    print_int_array(arr, s);
 
     set_array(arr);
     printf("unsorted array: ");
-    print_int_array(arr, 8);
-    selection_sort(arr, 8);
+    print_int_array(arr, s);
+    selection_sort(arr, s);
     printf("selection sort: ");
-    print_int_array(arr, 8);
+    print_int_array(arr, s);
 
     set_array(arr);
     printf("unsorted array: ");
-    print_int_array(arr, 8);
-    merge_sort(arr, 0, 7);
+    print_int_array(arr, s);
+    merge_sort(arr, 0, s);
     printf("merge sort    : ");
-    print_int_array(arr, 8);
+    print_int_array(arr, s);
 
     return 0;
 }
