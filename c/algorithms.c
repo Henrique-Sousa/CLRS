@@ -64,7 +64,7 @@ void binary_addition(char num1[], char num2[], char result[], int length) {
     result[i + 1] = carry;
 }
 
-void merge(int arr[], int p, int q, int r) {
+void merge_with_sentinel(int arr[], int p, int q, int r) {
     int n1, n2, i, j, k;
 
     n1 = q - p + 1;
@@ -89,6 +89,48 @@ void merge(int arr[], int p, int q, int r) {
         } else {
             arr[k] = right[j];
             j++;
+        }
+    }
+}
+
+void merge(int arr[], int p, int q, int r) {
+    int n1, n2, i, j, k;
+
+    n1 = q - p + 1;
+    n2 = r - q;
+    int left[n1], right[n2];
+
+    for (i = 0; i < n1; i++) {
+        left[i] = arr[p + i];
+    }
+    for (j = 0; j < n2; j++) {
+        right[j] = arr[q + j + 1];
+    }
+
+    i = j = 0;
+    for (k = p; k <= r; k++) {
+        if (left[i] <= right[j]) {
+            arr[k] = left[i];
+            i++;
+            if (i >= n1) {
+                while (j < n2) { 
+                    k++;
+                    arr[k] = right[j];
+                    j++;
+                }
+                break;
+            }
+        } else {
+            arr[k] = right[j];
+            j++;
+            if (j >= n2) {
+                while (i < n1) { 
+                    k++;
+                    arr[k] = left[i];
+                    i++;
+                }
+                break;
+            }
         }
     }
 }
