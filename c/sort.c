@@ -52,5 +52,12 @@ int main() {
     printf("merge sort    : ");
     print_int_array(arr, s);
 
+    set_array(arr);
+    printf("unsorted array: ");
+    print_int_array(arr, s);
+    merge_sort_with_sentinel(arr, 0, s);
+    printf("merge sort with sentinel: ");
+    print_int_array(arr, s);
+
     return 0;
 }

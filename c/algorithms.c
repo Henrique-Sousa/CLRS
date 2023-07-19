@@ -144,3 +144,13 @@ void merge_sort(int arr[], int p, int r) {
         merge(arr, p, q, r);
     }
 }
+
+void merge_sort_with_sentinel(int arr[], int p, int r) {
+    int q;
+    if (p < r) {
+        q = (p + r) / 2;
+        merge_sort(arr, p, q);
+        merge_sort(arr, q + 1, r);
+        merge_with_sentinel(arr, p, q, r);
+    }
+}
