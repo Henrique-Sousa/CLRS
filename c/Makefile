@@ -2,18 +2,20 @@ CFLAGS = -g -std=c99 -pedantic -Wall
 LDFLAGS = -g
 CC = gcc
 
-.PHONY: all
+EXECS = binary-addition linear-search sort
+AUXS = algorithms utils
+AUXSC = $(addsuffix .c, $(AUXS)) 
+SRCS = $(addsuffix .c, $(EXECS)) $(AUXSC)
 
-all: sort.out linear-search.out binary-addition.out
+.PHONY: all tags clean 
 
-binary-addition.out: binary-addition.o algorithms.o utils.o
-	$(CC) $^ -o $@ $(LDFLAGS)
+all: $(EXECS)
 
-linear-search.out: linear-search.o algorithms.o
-	$(CC) $^ -o $@ $(LDFLAGS)
-
-sort.out: utils.o algorithms.o sort.o
-	$(CC) $^ -o $@ $(LDFLAGS)
+$(EXECS): %: %.c $(AUXSC)
 
 clean:
-	rm -f *.o && rm -f *.out
+	$(RM) *.o $(EXECS)
+
+tags: 	
+	$(CC) -M $(SRCS) | sed -e 's/[\\ ]/\n/g' | sed -e '/^$$/d' -e '/\.o:[ \t]*$$/d' | ctags -L - --c-kinds=+p --fields=+S
+	ctags -aR .
