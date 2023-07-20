@@ -1,21 +1,26 @@
-CFLAGS = -g -std=c99 -pedantic -Wall
-LDFLAGS = -g
-CC = gcc
+CFLAGS := -g -std=c99 -pedantic -Wall
+LDFLAGS := -g
+CC := gcc
 
-EXECS = binary-addition linear-search sort
-AUXS = algorithms utils
-AUXSC = $(addsuffix .c, $(AUXS)) 
-SRCS = $(addsuffix .c, $(EXECS)) $(AUXSC)
+BUILD_DIR := ./build
+
+EXECS := binary-addition linear-search sort
+AUXS := algorithms.c utils.c
+SRCS := $(addsuffix .c, $(EXECS)) $(AUXS)
 
 .PHONY: all tags clean 
 
 all: $(EXECS)
 
-$(EXECS): %: %.c $(AUXSC)
+$(EXECS): %: %.c $(AUXS)
+	mkdir -p $(BUILD_DIR) 
+	$(CC) $^ $(CFLAGS) $(LDFLAGS) -o $(BUILD_DIR)/$@ 
 
 clean:
-	$(RM) *.o $(EXECS)
+	$(RM) -r $(BUILD_DIR) 
 
 tags: 	
-	$(CC) -M $(SRCS) | sed -e 's/[\\ ]/\n/g' | sed -e '/^$$/d' -e '/\.o:[ \t]*$$/d' | ctags -L - --c-kinds=+p --fields=+S
+	$(CC) -M $(SRCS) \
+		| sed -e 's/[\\ ]/\n/g' | sed -e '/^$$/d' -e '/\.o:[ \t]*$$/d' \
+		| ctags -L - --c-kinds=+p
 	ctags -aR .
